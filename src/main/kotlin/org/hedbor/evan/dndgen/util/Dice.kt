@@ -1,4 +1,4 @@
-package org.hedbor.evan.dndgen
+package org.hedbor.evan.dndgen.util
 
 import java.util.concurrent.ThreadLocalRandom
 

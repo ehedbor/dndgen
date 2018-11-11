@@ -1,7 +1,15 @@
 package org.hedbor.evan.dndgen
 
-import org.hedbor.evan.dndgen.AbilityType.*
-import org.hedbor.evan.dndgen.SkillType.*
+import org.hedbor.evan.dndgen.score.AbilityScore
+import org.hedbor.evan.dndgen.score.SavingThrow
+import org.hedbor.evan.dndgen.score.Skill
+import org.hedbor.evan.dndgen.type.AbilityType
+import org.hedbor.evan.dndgen.type.AbilityType.*
+import org.hedbor.evan.dndgen.type.Alignment
+import org.hedbor.evan.dndgen.type.SkillType.*
+import org.hedbor.evan.dndgen.util.modifierToString
+import org.hedbor.evan.dndgen.util.withType
+import org.hedbor.evan.dndgen.util.xpToLevel
 
 
 /**
@@ -11,10 +19,10 @@ class CharacterSheet {
     var characterName: String = ""
         internal set
     //val class: Class
-    val level get() = levelFromXp(xp)
+    val level get() = xpToLevel(xp)
     //val race: Race
     //val background: Background
-    //val alignment: Alignment
+    val alignment: Alignment = Alignment.TRUE_NEUTRAL
     var playerName: String = ""
         internal set
     var xp = 0
@@ -43,9 +51,16 @@ class CharacterSheet {
         val characterInfo = listOf(
             "Character Sheet:",
             "",
+            "Alignment: $alignment",
             "Experience Points: $xp",
             "Level: $level",
-            "Proficiency Bonus: $proficiencyBonus") +
+            "",
+            "Armor Class: $armorClass",
+            "Initiative: ${modifierToString(initiative)}",
+            "Speed: $speed",
+            "",
+            "Proficiency Bonus: ${modifierToString(proficiencyBonus)}",
+            "Passive Perception: $passivePerception") +
             listOf("", "Ability Scores:") + abilities.map { it.toString() } +
             listOf("", "Saving Throws:") + savingThrows.map { it.toString() } +
             listOf("", "Skills:") + skills.map { it.toString() }

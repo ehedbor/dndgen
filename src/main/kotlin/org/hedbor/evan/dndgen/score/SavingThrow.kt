@@ -1,4 +1,9 @@
-package org.hedbor.evan.dndgen
+package org.hedbor.evan.dndgen.score
+
+import org.hedbor.evan.dndgen.CharacterSheet
+import org.hedbor.evan.dndgen.util.modifierToString
+import org.hedbor.evan.dndgen.type.AbilityType
+import org.hedbor.evan.dndgen.util.withType
 
 
 /**
@@ -16,11 +21,7 @@ class SavingThrow(val characterSheet: CharacterSheet, val type: AbilityType, var
 
     override fun equals(other: Any?) = (other as? SavingThrow)?.type == this.type
     override fun hashCode() = type.hashCode()
-
-    override fun toString(): String {
-        val mod = if (modifier >= 0) "$modifier" else "$modifier"
-        return "$type: $mod"
-    }
+    override fun toString() = "$type: ${modifierToString(modifier)}"
 
     companion object {
         fun defaults(sheet: CharacterSheet): Set<SavingThrow> {

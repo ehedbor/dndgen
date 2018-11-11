@@ -1,4 +1,10 @@
-package org.hedbor.evan.dndgen
+package org.hedbor.evan.dndgen.util
+
+import org.hedbor.evan.dndgen.score.AbilityScore
+import org.hedbor.evan.dndgen.score.SavingThrow
+import org.hedbor.evan.dndgen.score.Skill
+import org.hedbor.evan.dndgen.type.AbilityType
+import org.hedbor.evan.dndgen.type.SkillType
 
 
 fun Set<AbilityScore>.withType(abilityType: AbilityType) = first { it.type == abilityType }
@@ -6,9 +12,9 @@ fun Set<SavingThrow>.withType(savingThrowType: AbilityType) = first { it.type ==
 fun Set<Skill>.withType(abilityType: SkillType) = first { it.type == abilityType }
 
 /**
- * Returns the correct level given an amount of experience.
+ * Returns the correct level given an amount of [xp].
  */
-fun levelFromXp(xp: Int): Int {
+fun xpToLevel(xp: Int): Int {
     return when {
         xp > 355_000 -> 20
         xp > 305_000 -> 19
@@ -31,4 +37,17 @@ fun levelFromXp(xp: Int): Int {
         xp > 300 -> 2
         else -> 1
     }
+}
+
+/**
+ * Converts a modifier to a [String] (adds a plus sign if not negative).
+ */
+fun modifierToString(modifier: Int) = if (modifier >= 0) "+$modifier" else "$modifier"
+
+/**
+ * Converts an enum's name to a readable format. Does not handle spaces.
+ */
+fun readableEnumToString(name: String) = when (name.length) {
+    in 0..1 -> name
+    else -> name[0].toUpperCase() + name.substring(1).toLowerCase()
 }

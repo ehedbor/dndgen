@@ -1,5 +1,6 @@
 package org.hedbor.evan.dndgen
 
+import org.hedbor.evan.dndgen.util.d
 import java.util.*
 
 
@@ -7,10 +8,8 @@ fun main(args: Array<String>) {
     val console = Scanner(System.`in`)
     val characterSheet = CharacterSheet()
 
-    // roll 3d6 7 times and remove the lowest score
-    var rolls = List(7) { 3.d(6) }
-        .sortedDescending()
-        .slice(0 until 6)
+    // roll 3d6 7 times
+    var rolls = List(7) { 3.d(6) }.sortedDescending()
 
     println("D&D Character Generator:")
     println("Generated these ability scores: $rolls")
