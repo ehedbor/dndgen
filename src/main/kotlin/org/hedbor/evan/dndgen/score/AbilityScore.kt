@@ -13,7 +13,7 @@ class AbilityScore(val type: AbilityType, var value: Int) {
 
     override fun equals(other: Any?) = (other as? AbilityScore)?.type == this.type
     override fun hashCode() = type.hashCode()
-    override fun toString()=  "$type: $value (${modifierToString(modifier)}"
+    override fun toString()=  "$type: $value (${modifierToString(modifier)})"
 
     companion object {
         fun defaults(): Set<AbilityScore> {

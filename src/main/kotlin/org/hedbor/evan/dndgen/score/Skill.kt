@@ -21,7 +21,7 @@ class Skill(val characterSheet: CharacterSheet, val type: SkillType, var profici
 
     override fun equals(other: Any?) = (other as? Skill)?.type == this.type
     override fun hashCode() = type.hashCode()
-    override fun toString() = "$type: ${modifierToString(modifier)}"
+    override fun toString() = "$type: (${modifierToString(modifier)})"
 
     companion object {
         fun defaults(sheet: CharacterSheet): Set<Skill> {

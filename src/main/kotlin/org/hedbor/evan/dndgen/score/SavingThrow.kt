@@ -21,7 +21,7 @@ class SavingThrow(val characterSheet: CharacterSheet, val type: AbilityType, var
 
     override fun equals(other: Any?) = (other as? SavingThrow)?.type == this.type
     override fun hashCode() = type.hashCode()
-    override fun toString() = "$type: ${modifierToString(modifier)}"
+    override fun toString() = "$type: (${modifierToString(modifier)})"
 
     companion object {
         fun defaults(sheet: CharacterSheet): Set<SavingThrow> {

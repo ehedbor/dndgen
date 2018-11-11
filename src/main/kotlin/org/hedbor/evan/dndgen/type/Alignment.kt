@@ -53,6 +53,7 @@ enum class Alignment(val lawfulness: Lawfulness, val morality: Morality) {
     );
 
     override fun toString() = when (this) {
+        TRUE_NEUTRAL -> "True Neutral"
         UNALIGNED -> "Unaligned"
         else -> "$lawfulness $morality"
     }

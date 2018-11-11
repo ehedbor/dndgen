@@ -15,22 +15,26 @@ import org.hedbor.evan.dndgen.util.xpToLevel
 /**
  * Models a D&D 5e character sheet. Holds all information relevant to a character.
  */
-class CharacterSheet {
+class CharacterSheet() {
     var characterName: String = ""
         internal set
     //val class: Class
     val level get() = xpToLevel(xp)
     //val race: Race
     //val background: Background
-    val alignment: Alignment = Alignment.TRUE_NEUTRAL
+    var alignment = Alignment.TRUE_NEUTRAL
+        internal set
     var playerName: String = ""
         internal set
     var xp = 0
         internal set
 
-    val abilities: Set<AbilityScore> = AbilityScore.defaults()
-    val savingThrows: Set<SavingThrow> = SavingThrow.defaults(this)
-    val skills: Set<Skill> = Skill.defaults(this)
+    var abilities: Set<AbilityScore> = AbilityScore.defaults()
+        internal set
+    var savingThrows: Set<SavingThrow> = SavingThrow.defaults(this)
+        internal set
+    var skills: Set<Skill> = Skill.defaults(this)
+        internal set
 
     val proficiencyBonus get() = 2 + (level - 1) / 4
     val passivePerception get() = 10 + skills.withType(PERCEPTION).modifier
@@ -49,7 +53,8 @@ class CharacterSheet {
 
     override fun toString(): String {
         val characterInfo = listOf(
-            "Character Sheet:",
+            "$characterName:",
+            "Player: $playerName",
             "",
             "Alignment: $alignment",
             "Experience Points: $xp",
