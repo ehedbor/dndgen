@@ -5,7 +5,7 @@ import java.util.*
 
 fun main(args: Array<String>) {
     val console = Scanner(System.`in`)
-    val characterSheet = Character()
+    val characterSheet = CharacterSheet()
 
     // roll 3d6 7 times and remove the lowest score
     var rolls = List(7) { 3.d(6) }
@@ -14,15 +14,18 @@ fun main(args: Array<String>) {
 
     println("D&D Character Generator:")
     println("Generated these ability scores: $rolls")
+    println()
 
-    for (ability in AbilityType.values()) {
-        val scoreUsed = console.repeatUntilInt("$ability: ") { it != null && rolls.contains(it) }!!
-        rolls -= scoreUsed
-        characterSheet.abilities += ability to AbilityScore(scoreUsed)
+    for (ability in characterSheet.abilities) {
+        println("Available scores: $rolls")
+
+        val score = console.repeatUntilInt("${ability.type}: ") { it != null && rolls.contains(it) }!!
+        ability.value = score
+        rolls -= score
+
+        println()
     }
 
-    println("Character sheet:")
-    println()
     println(characterSheet)
 }
 
