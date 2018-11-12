@@ -9,6 +9,7 @@ import org.hedbor.evan.dndgen.type.Alignment
 import org.hedbor.evan.dndgen.type.SkillType
 import java.lang.IllegalStateException
 
+
 class CharacterSheetBuilder {
     var characterName: String? = null
     var playerName: String? = null

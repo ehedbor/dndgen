@@ -10,47 +10,17 @@ import org.hedbor.evan.dndgen.util.readableEnumToString
  * @param morality The [Morality] of the character
  */
 enum class Alignment(val lawfulness: Lawfulness, val morality: Morality) {
-    LAWFUL_GOOD    (
-        Lawfulness.LAWFUL,
-        Morality.GOOD
-    ),
-    NEUTRAL_GOOD   (
-        Lawfulness.NEUTRAL,
-        Morality.GOOD
-    ),
-    CHAOTIC_GOOD   (
-        Lawfulness.CHAOTIC,
-        Morality.GOOD
-    ),
-    LAWFUL_NEUTRAL (
-        Lawfulness.LAWFUL,
-        Morality.NEUTRAL
-    ),
-    TRUE_NEUTRAL   (
-        Lawfulness.NEUTRAL,
-        Morality.NEUTRAL
-    ),
-    CHAOTIC_NEUTRAL(
-        Lawfulness.CHAOTIC,
-        Morality.NEUTRAL
-    ),
-    LAWFUL_EVIL    (
-        Lawfulness.LAWFUL,
-        Morality.EVIL
-    ),
-    NEUTRAL_EVIL   (
-        Lawfulness.NEUTRAL,
-        Morality.EVIL
-    ),
-    CHAOTIC_EVIL   (
-        Lawfulness.CHAOTIC,
-        Morality.EVIL
-    ),
+    LAWFUL_GOOD    (Lawfulness.LAWFUL,    Morality.GOOD),
+    NEUTRAL_GOOD   (Lawfulness.NEUTRAL,   Morality.GOOD),
+    CHAOTIC_GOOD   (Lawfulness.CHAOTIC,   Morality.GOOD),
+    LAWFUL_NEUTRAL (Lawfulness.LAWFUL,    Morality.NEUTRAL),
+    TRUE_NEUTRAL   (Lawfulness.NEUTRAL,   Morality.NEUTRAL),
+    CHAOTIC_NEUTRAL(Lawfulness.CHAOTIC,   Morality.NEUTRAL),
+    LAWFUL_EVIL    (Lawfulness.LAWFUL,    Morality.EVIL),
+    NEUTRAL_EVIL   (Lawfulness.NEUTRAL,   Morality.EVIL),
+    CHAOTIC_EVIL   (Lawfulness.CHAOTIC,   Morality.EVIL),
     /** A special alignment reserved for creatures that have no concept of law or morals. */
-    UNALIGNED      (
-        Lawfulness.UNALIGNED,
-        Morality.UNALIGNED
-    );
+    UNALIGNED      (Lawfulness.UNALIGNED, Morality.UNALIGNED);
 
     override fun toString() = when (this) {
         TRUE_NEUTRAL -> "True Neutral"
