@@ -1,6 +1,6 @@
 package org.hedbor.evan.dndgen
 
-import org.hedbor.evan.dndgen.score.AbilityScore
+import org.hedbor.evan.dndgen.score.Ability
 import org.hedbor.evan.dndgen.score.SavingThrow
 import org.hedbor.evan.dndgen.score.Skill
 import org.hedbor.evan.dndgen.type.AbilityType
@@ -29,7 +29,7 @@ class CharacterSheet() {
     var xp = 0
         internal set
 
-    var abilities: Set<AbilityScore> = AbilityScore.defaults()
+    var abilities: Set<Ability> = Ability.defaults()
         internal set
     var savingThrows: Set<SavingThrow> = SavingThrow.defaults(this)
         internal set

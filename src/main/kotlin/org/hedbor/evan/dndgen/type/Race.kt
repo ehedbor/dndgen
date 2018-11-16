@@ -14,7 +14,7 @@ sealed class Race(
     open val languageCount: Int = 2,
     open val reccommendedLanguages: List<Language>
 ) {
-    sealed class Dwarf : Race(
+    abstract class Dwarf : Race(
         scoreIncreases = mapOf(
             CONSTITUTION to 2
         ),
@@ -25,17 +25,17 @@ sealed class Race(
         ),
         speed = 25,
         reccommendedLanguages = listOf(COMMON, DWARVISH)
-    ) {
-        object Hill : Dwarf() {
-            override val scoreIncreases = super.scoreIncreases + mapOf(WISDOM to 1)
-        }
+    )
 
-        object Mountain : Dwarf() {
-            override val scoreIncreases = super.scoreIncreases + mapOf(STRENGTH to 2)
-        }
+    object HillElf : Dwarf() {
+        override val scoreIncreases = super.scoreIncreases + mapOf(WISDOM to 1)
     }
 
-    sealed class Elf : Race(
+    object MountainElf : Dwarf() {
+        override val scoreIncreases = super.scoreIncreases + mapOf(STRENGTH to 2)
+    }
+
+    abstract class Elf : Race(
         scoreIncreases = mapOf(
             DEXTERITY to 2
         ),
@@ -45,27 +45,27 @@ sealed class Race(
             CHAOTIC_NEUTRAL
         ),
         reccommendedLanguages = listOf(COMMON, ELVISH)
-    ) {
-        object High : Elf() {
-            override val scoreIncreases = super.scoreIncreases + mapOf(INTELLIGENCE to 1)
-            override val languageCount = super.languageCount + 1
-        }
+    )
 
-        object Wood : Elf() {
-            override val scoreIncreases = super.scoreIncreases + mapOf(WISDOM to 1)
-        }
-
-        object Dark : Elf() {
-            override val scoreIncreases = super.scoreIncreases + mapOf(CHARISMA to 1)
-            override val reccomendedAlignments = listOf(
-                CHAOTIC_EVIL,
-                NEUTRAL_EVIL,
-                CHAOTIC_NEUTRAL
-            )
-        }
+    object HighElf : Elf() {
+        override val scoreIncreases = super.scoreIncreases + mapOf(INTELLIGENCE to 1)
+        override val languageCount = super.languageCount + 1
     }
 
-    sealed class Halfling : Race(
+    object WoodElf : Elf() {
+        override val scoreIncreases = super.scoreIncreases + mapOf(WISDOM to 1)
+    }
+
+    object DarkElf : Elf() {
+        override val scoreIncreases = super.scoreIncreases + mapOf(CHARISMA to 1)
+        override val reccomendedAlignments = listOf(
+            CHAOTIC_EVIL,
+            NEUTRAL_EVIL,
+            CHAOTIC_NEUTRAL
+        )
+    }
+
+    abstract class Halfling : Race(
         scoreIncreases = mapOf(
             DEXTERITY to 2
         ),
@@ -75,14 +75,14 @@ sealed class Race(
             NEUTRAL_GOOD
         ),
         reccommendedLanguages = listOf(COMMON, HALFLING)
-    ) {
-        object Lightfoot : Halfling() {
-            override val scoreIncreases = super.scoreIncreases + mapOf(CHARISMA to 1)
-        }
+    )
 
-        object Stout : Halfling() {
-            override val scoreIncreases = super.scoreIncreases + mapOf(CONSTITUTION to 1)
-        }
+    object StoutHalfling : Halfling() {
+        override val scoreIncreases = super.scoreIncreases + mapOf(CONSTITUTION to 1)
+    }
+
+    object LightfootHalfling : Halfling() {
+        override val scoreIncreases = super.scoreIncreases + mapOf(CHARISMA to 1)
     }
 
     object Human : Race(
@@ -124,7 +124,7 @@ sealed class Race(
         reccommendedLanguages = listOf(COMMON, DRACONIC)
     )
 
-    sealed class Gnome : Race(
+    abstract class Gnome : Race(
         scoreIncreases = mapOf(
             INTELLIGENCE to 2
         ),
@@ -136,14 +136,14 @@ sealed class Race(
         size = SizeCategory.SMALL,
         speed = 25,
         reccommendedLanguages = listOf(COMMON, GNOMISH)
-    ) {
-        object Forest : Gnome() {
-            override val scoreIncreases = super.scoreIncreases + mapOf(DEXTERITY to 1)
-        }
+    )
 
-        object Rock : Gnome() {
-            override val scoreIncreases = super.scoreIncreases + mapOf(CONSTITUTION to 1)
-        }
+    object ForestGnome : Gnome() {
+        override val scoreIncreases = super.scoreIncreases + mapOf(DEXTERITY to 1)
+    }
+
+    object RockGnome : Gnome() {
+        override val scoreIncreases = super.scoreIncreases + mapOf(CONSTITUTION to 1)
     }
 
     object HalfElf : Race(

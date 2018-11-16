@@ -1,7 +1,7 @@
 package org.hedbor.evan.dndgen.util
 
 import org.hedbor.evan.dndgen.CharacterSheet
-import org.hedbor.evan.dndgen.score.AbilityScore
+import org.hedbor.evan.dndgen.score.Ability
 import org.hedbor.evan.dndgen.score.SavingThrow
 import org.hedbor.evan.dndgen.score.Skill
 import org.hedbor.evan.dndgen.type.AbilityType
@@ -30,7 +30,7 @@ class CharacterSheetBuilder {
                 throw IllegalStateException("Must provide ability score $a.")
             }
         }
-        c.abilities = abilities.map { AbilityScore(it.key, it.value) }.toSet()
+        c.abilities = abilities.map { Ability(it.key, it.value) }.toSet()
 
         // Not proficient in saving throw by default
         for (a in AbilityType.values()) {

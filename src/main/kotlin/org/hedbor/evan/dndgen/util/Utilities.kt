@@ -1,13 +1,13 @@
 package org.hedbor.evan.dndgen.util
 
-import org.hedbor.evan.dndgen.score.AbilityScore
+import org.hedbor.evan.dndgen.score.Ability
 import org.hedbor.evan.dndgen.score.SavingThrow
 import org.hedbor.evan.dndgen.score.Skill
 import org.hedbor.evan.dndgen.type.AbilityType
 import org.hedbor.evan.dndgen.type.SkillType
 
 
-fun Set<AbilityScore>.withType(abilityType: AbilityType) = first { it.type == abilityType }
+fun Set<Ability>.withType(abilityType: AbilityType) = first { it.type == abilityType }
 fun Set<SavingThrow>.withType(savingThrowType: AbilityType) = first { it.type == savingThrowType }
 fun Set<Skill>.withType(abilityType: SkillType) = first { it.type == abilityType }
 

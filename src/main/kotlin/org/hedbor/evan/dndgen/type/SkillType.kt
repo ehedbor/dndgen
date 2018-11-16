@@ -8,7 +8,7 @@ import org.hedbor.evan.dndgen.type.AbilityType.*
  *
  * @see Skill
  */
-enum class SkillType(val baseAbility: AbilityType) {
+enum class SkillType(val baseAbility: AbilityType) : ScoreType {
     /** Used when trying to maintain balance or general nimbleness. */
     ACROBATICS(DEXTERITY),
     /** Used to determine how well one deals with animals. */

@@ -7,7 +7,7 @@ import org.hedbor.evan.dndgen.util.readableEnumToString
  *
  *  @see AbilityScore
  */
-enum class AbilityType {
+enum class AbilityType : ScoreType {
     /** Measures natural athleticism and bodily power. */
     STRENGTH,
     /** Measures physical agility, reflexes, balance, and poise. */
