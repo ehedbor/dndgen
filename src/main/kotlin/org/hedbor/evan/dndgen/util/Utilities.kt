@@ -5,6 +5,7 @@ import org.hedbor.evan.dndgen.score.SavingThrow
 import org.hedbor.evan.dndgen.score.Skill
 import org.hedbor.evan.dndgen.type.AbilityType
 import org.hedbor.evan.dndgen.type.SkillType
+import java.util.*
 
 
 fun Set<Ability>.withType(abilityType: AbilityType) = first { it.type == abilityType }
@@ -50,4 +51,8 @@ fun modifierToString(modifier: Int) = if (modifier >= 0) "+$modifier" else "$mod
 fun readableEnumToString(name: String) = when (name.length) {
     in 0..1 -> name
     else -> name[0].toUpperCase() + name.substring(1).toLowerCase()
+}
+
+fun <K: Enum<K>, V> Map<K, V>.toEnumMap(): EnumMap<K, V> {
+    return EnumMap(this)
 }

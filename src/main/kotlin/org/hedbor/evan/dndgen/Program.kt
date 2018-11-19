@@ -1,12 +1,9 @@
 package org.hedbor.evan.dndgen
 
-import org.hedbor.evan.dndgen.type.AbilityType
-import org.hedbor.evan.dndgen.type.Alignment
-import org.hedbor.evan.dndgen.type.SkillType
+import org.hedbor.evan.dndgen.type.*
 import org.hedbor.evan.dndgen.util.characterSheet
 import org.hedbor.evan.dndgen.util.d
 import java.util.*
-
 
 fun main(args: Array<String>) {
     val console = Scanner(System.`in`)
@@ -52,6 +49,8 @@ fun main(args: Array<String>) {
     }
     println(characterSheet)
 }
+
+
 
 fun Scanner.promptStringUntil(prompt: String, predicate: (String) -> Boolean): String {
     print(prompt)
