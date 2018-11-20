@@ -53,6 +53,8 @@ fun readableEnumToString(name: String) = when (name.length) {
     else -> name[0].toUpperCase() + name.substring(1).toLowerCase()
 }
 
-fun <K: Enum<K>, V> Map<K, V>.toEnumMap(): EnumMap<K, V> {
-    return EnumMap(this)
-}
+fun <K: Enum<K>, V> Map<K, V>.toEnumMap() = EnumMap<K, V>(this.toMutableMap())
+
+inline fun <reified K: Enum<K>, V> emptyEnumMap() = EnumMap<K, V>(K::class.java)
+
+fun <K: Enum<K>, V> enumMapOf(vararg pairs: Pair<K, V>) = EnumMap<K, V>(mutableMapOf(*pairs))

@@ -1,6 +1,5 @@
 package org.hedbor.evan.dndgen.type
 
-import java.util.EnumMap
 
 /**
  * Models a playable race in D&D.
@@ -14,7 +13,7 @@ import java.util.EnumMap
  */
 data class Race(
     val name: String,
-    val abilityScores: EnumMap<AbilityType, Int>,
+    val abilityScores: Map<AbilityType, Int>,
     val size: SizeCategory,
     val speed: Int,
     val languages: List<Language>,
