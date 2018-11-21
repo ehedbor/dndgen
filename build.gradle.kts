@@ -3,8 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     application
     idea
-    java
-    kotlin("jvm") version "1.3.0"
+    kotlin("jvm") version "1.3.10"
 }
 
 group = "org.hedbor.evan"
@@ -25,6 +24,7 @@ repositories {
 
 dependencies {
     compile(kotlin("stdlib-jdk8"))
+    compile(kotlin("reflect"))
     compile("no.tornado:tornadofx:1.7.17")
 }
 

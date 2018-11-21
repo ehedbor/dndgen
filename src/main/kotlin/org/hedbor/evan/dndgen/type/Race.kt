@@ -23,6 +23,8 @@ sealed class Race(
     val languages: List<Language>,
     val entry: String?
 ) {
+    override fun toString() = name
+
     object Human : Race(
         name = "Human",
         abilityScores = enumMapOf(
