@@ -1,6 +1,5 @@
 package org.hedbor.evan.dndgen.type
 
-import org.hedbor.evan.dndgen.util.Parser
 import org.hedbor.evan.dndgen.util.readableEnumToString
 
 /**
@@ -23,18 +22,4 @@ enum class AbilityType : ScoreType {
     CHARISMA;
 
     override fun toString() = readableEnumToString(name)
-
-    companion object : Parser<AbilityType> {
-        override fun fromString(value: String): AbilityType? {
-            return when (value.toLowerCase()) {
-                "str" -> STRENGTH
-                "dex" -> DEXTERITY
-                "con" -> CONSTITUTION
-                "int" -> INTELLIGENCE
-                "wis" -> WISDOM
-                "cha" -> CHARISMA
-                else -> null
-            }
-        }
-    }
 }
