@@ -11,7 +11,7 @@ group = "org.hedbor.evan"
 version = "1.0-SNAPSHOT"
 
 application {
-    mainClassName = "org.hedbor.evan.dndgen.ProgramKt"
+    mainClassName = "org.hedbor.evan.dndgen.DndGenAppKt"
 }
 
 java {
@@ -25,9 +25,7 @@ repositories {
 
 dependencies {
     compile(kotlin("stdlib-jdk8"))
-    compile("com.fasterxml.jackson.core:jackson-databind:2.7.1-1")
-    compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.7.1-2")
-    compile("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.7.1")
+    compile("no.tornado:tornadofx:1.7.17")
 }
 
 tasks.withType<KotlinCompile> {
