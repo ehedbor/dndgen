@@ -1,6 +1,5 @@
 package org.hedbor.evan.dndgen.ui
 
-import javafx.collections.FXCollections
 import org.hedbor.evan.dndgen.CharacterSheet
 import org.hedbor.evan.dndgen.type.AbilityType
 import org.hedbor.evan.dndgen.type.Alignment.*
@@ -8,7 +7,7 @@ import org.hedbor.evan.dndgen.type.Race
 import tornadofx.*
 
 
-class DndGenView : View() {
+class CharacterBuilderView : View() {
     private val characterSheet = CharacterSheet()
 
     override val root = vbox {
@@ -18,16 +17,18 @@ class DndGenView : View() {
             fieldset("1. Choose a Race") {
                 field("Race") {
                     combobox(characterSheet.raceProperty) {
-                        items = FXCollections.observableArrayList(
+                        items = listOf(
                             null,
                             Race.Human
-                        )
+                        ).observable()
                     }
                 }
             }
             fieldset("2. Choose a Class") {
                 field("Class") {
-                    combobox<Nothing?>()
+                    combobox<Nothing?> {
+                        items = listOf(null).observable()
+                    }
                 }
             }
             fieldset("3. Determine Ability Scores") {
@@ -38,7 +39,7 @@ class DndGenView : View() {
             fieldset("4. Describe Your Character") {
                 field("Alignment") {
                     combobox(characterSheet.alignmentProperty) {
-                        items = FXCollections.observableArrayList(
+                        items = listOf(
                             null,
                             LAWFUL_GOOD,
                             NEUTRAL_GOOD,
@@ -48,12 +49,15 @@ class DndGenView : View() {
                             CHAOTIC_NEUTRAL,
                             LAWFUL_EVIL,
                             NEUTRAL_EVIL,
-                            CHAOTIC_EVIL
-                        )
+                            CHAOTIC_EVIL,
+                            UNALIGNED
+                        ).observable()
                     }
                 }
                 field("Background") {
-                    combobox<Nothing?>()
+                    combobox<Nothing?> {
+                        items = listOf(null).observable()
+                    }
                 }
                 field("Personality Traits") {
                     textfield(characterSheet.personalityTraitsProperty)

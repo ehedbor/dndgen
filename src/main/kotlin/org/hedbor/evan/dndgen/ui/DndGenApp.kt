@@ -6,4 +6,4 @@ import tornadofx.launch
 
 fun main(args: Array<String>) = launch<DndGenApp>(args)
 
-class DndGenApp : App(DndGenView::class)
+class DndGenApp : App(CharacterBuilderView::class)
