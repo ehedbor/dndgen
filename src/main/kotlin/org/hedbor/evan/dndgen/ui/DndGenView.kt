@@ -1,16 +1,15 @@
 package org.hedbor.evan.dndgen.ui
 
 import javafx.collections.FXCollections
-import javafx.util.StringConverter
+import org.hedbor.evan.dndgen.CharacterSheet
 import org.hedbor.evan.dndgen.type.AbilityType
-import org.hedbor.evan.dndgen.type.Alignment
 import org.hedbor.evan.dndgen.type.Alignment.*
 import org.hedbor.evan.dndgen.type.Race
 import tornadofx.*
 
 
 class DndGenView : View() {
-    private val characterSheet = CharacterSheetModel()
+    private val characterSheet = CharacterSheet()
 
     override val root = vbox {
         // TODO: implement the unused properties.
@@ -56,10 +55,18 @@ class DndGenView : View() {
                 field("Background") {
                     combobox<Nothing?>()
                 }
-                field("Personality Traits") { textfield() }
-                field("Ideals") { textfield() }
-                field("Bonds") { textfield() }
-                field("Flaws") { textfield() }
+                field("Personality Traits") {
+                    textfield(characterSheet.personalityTraitsProperty)
+                }
+                field("Ideals") {
+                    textfield(characterSheet.idealsProperty)
+                }
+                field("Bonds") {
+                    textfield(characterSheet.bondsProperty)
+                }
+                field("Flaws") {
+                    textfield(characterSheet.flawsProperty)
+                }
             }
             fieldset("5. Finishing Touches") {
                 field("Character Name") {

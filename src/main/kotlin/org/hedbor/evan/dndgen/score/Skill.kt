@@ -1,9 +1,10 @@
 package org.hedbor.evan.dndgen.score
 
 import org.hedbor.evan.dndgen.CharacterSheet
-import org.hedbor.evan.dndgen.util.modifierToString
+import org.hedbor.evan.dndgen.type.ProficiencyLevel
 import org.hedbor.evan.dndgen.type.SkillType
-import org.hedbor.evan.dndgen.util.withType
+import tornadofx.getValue
+import tornadofx.integerBinding
 
 
 /**
@@ -11,24 +12,15 @@ import org.hedbor.evan.dndgen.util.withType
  *
  *  @see SkillType
  */
-class Skill(val characterSheet: CharacterSheet, override val type: SkillType, var proficient: Boolean = false) : Score() {
-    override val modifier: Int
-        get() {
-            val abilityModifier = characterSheet.abilities.withType(type.baseAbility).modifier
-            val proficiencyModifier = if (proficient) characterSheet.proficiencyBonus else 0
-            return abilityModifier + proficiencyModifier
-        }
-
-    override fun equals(other: Any?) = (other as? Skill)?.type == this.type
-    override fun hashCode() = type.hashCode()
-
-    companion object {
-        fun defaults(sheet: CharacterSheet): Set<Skill> {
-            val set = mutableSetOf<Skill>()
-            for (s in SkillType.values()) {
-                set.add(Skill(sheet, s))
-            }
-            return set
-        }
+class Skill(
+    override val characterSheet: CharacterSheet,
+    override val type: SkillType,
+    val proficiency: ProficiencyLevel = ProficiencyLevel.NOT_PROFICIENT
+) : Score() {
+    val modifierProperty = integerBinding(characterSheet, characterSheet.abilitiesProperty, characterSheet.proficiencyBonusProperty) {
+        val abilityMod = this.abilities?.get(type.baseAbility)?.modifier ?: 0
+        val profMod = this.proficiencyBonus * proficiency.multiplier
+        abilityMod + profMod
     }
+    override val modifier: Int by modifierProperty
 }

@@ -1,21 +1,9 @@
 package org.hedbor.evan.dndgen.util
 
-import org.hedbor.evan.dndgen.score.Ability
-import org.hedbor.evan.dndgen.score.SavingThrow
-import org.hedbor.evan.dndgen.score.Skill
-import org.hedbor.evan.dndgen.type.AbilityType
-import org.hedbor.evan.dndgen.type.SkillType
-import java.util.*
-
-
-fun Set<Ability>.withType(abilityType: AbilityType) = first { it.type == abilityType }
-fun Set<SavingThrow>.withType(savingThrowType: AbilityType) = first { it.type == savingThrowType }
-fun Set<Skill>.withType(abilityType: SkillType) = first { it.type == abilityType }
-
 /**
  * Returns the correct level given an amount of [xp].
  */
-fun xpToLevel(xp: Int): Int {
+fun expToLevel(xp: Int): Int {
     return when {
         xp > 355_000 -> 20
         xp > 305_000 -> 19
@@ -41,20 +29,9 @@ fun xpToLevel(xp: Int): Int {
 }
 
 /**
- * Converts a modifier to a [String] (adds a plus sign if not negative).
- */
-fun modifierToString(modifier: Int) = if (modifier >= 0) "+$modifier" else "$modifier"
-
-/**
  * Converts an enum's name to a readable format. Does not handle spaces.
  */
 fun readableEnumToString(name: String) = when (name.length) {
     in 0..1 -> name
     else -> name[0].toUpperCase() + name.substring(1).toLowerCase()
 }
-
-fun <K: Enum<K>, V> Map<K, V>.toEnumMap() = EnumMap<K, V>(this.toMutableMap())
-
-inline fun <reified K: Enum<K>, V> emptyEnumMap() = EnumMap<K, V>(K::class.java)
-
-fun <K: Enum<K>, V> enumMapOf(vararg pairs: Pair<K, V>) = EnumMap<K, V>(mutableMapOf(*pairs))

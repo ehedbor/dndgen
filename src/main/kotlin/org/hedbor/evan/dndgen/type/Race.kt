@@ -2,7 +2,6 @@ package org.hedbor.evan.dndgen.type
 
 import org.hedbor.evan.dndgen.type.AbilityType.*
 import org.hedbor.evan.dndgen.type.SizeCategory.MEDIUM
-import org.hedbor.evan.dndgen.util.enumMapOf
 
 
 /**
@@ -27,7 +26,7 @@ sealed class Race(
 
     object Human : Race(
         name = "Human",
-        abilityScores = enumMapOf(
+        abilityScores = mapOf(
             STRENGTH to 1,
             DEXTERITY to 1,
             CONSTITUTION to 1,
