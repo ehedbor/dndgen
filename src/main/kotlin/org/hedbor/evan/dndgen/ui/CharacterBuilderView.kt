@@ -1,6 +1,5 @@
 package org.hedbor.evan.dndgen.ui
 
-import org.hedbor.evan.dndgen.CharacterSheet
 import org.hedbor.evan.dndgen.type.AbilityType
 import org.hedbor.evan.dndgen.type.Alignment.*
 import org.hedbor.evan.dndgen.type.Race
@@ -8,7 +7,7 @@ import tornadofx.*
 
 
 class CharacterBuilderView : View() {
-    private val characterSheet = CharacterSheet()
+    private val model = CharacterSheetModel()
 
     override val root = vbox {
         // TODO: implement the unused properties.
@@ -16,8 +15,8 @@ class CharacterBuilderView : View() {
         form {
             fieldset("1. Choose a Race") {
                 field("Race") {
-                    combobox(characterSheet.raceProperty) {
-                        items = listOf(
+                    combobox(model.race) {
+                        items = listOf<Race?>(
                             null,
                             Race.Human
                         ).observable()
@@ -38,7 +37,7 @@ class CharacterBuilderView : View() {
             }
             fieldset("4. Describe Your Character") {
                 field("Alignment") {
-                    combobox(characterSheet.alignmentProperty) {
+                    combobox(model.alignment) {
                         items = listOf(
                             null,
                             LAWFUL_GOOD,
@@ -60,24 +59,24 @@ class CharacterBuilderView : View() {
                     }
                 }
                 field("Personality Traits") {
-                    textfield(characterSheet.personalityTraitsProperty)
+                    textfield(model.personalityTraits)
                 }
                 field("Ideals") {
-                    textfield(characterSheet.idealsProperty)
+                    textfield(model.ideals)
                 }
                 field("Bonds") {
-                    textfield(characterSheet.bondsProperty)
+                    textfield(model.bonds)
                 }
                 field("Flaws") {
-                    textfield(characterSheet.flawsProperty)
+                    textfield(model.flaws)
                 }
             }
             fieldset("5. Finishing Touches") {
                 field("Character Name") {
-                    textfield(characterSheet.characterNameProperty)
+                    textfield(model.characterName)
                 }
                 field("Player Name") {
-                    textfield(characterSheet.playerNameProperty)
+                    textfield(model.playerName)
                 }
             }
         }

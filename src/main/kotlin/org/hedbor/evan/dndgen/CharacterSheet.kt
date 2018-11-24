@@ -1,7 +1,9 @@
 package org.hedbor.evan.dndgen
 
-import javafx.beans.property.*
-import javafx.collections.FXCollections
+import javafx.beans.property.SimpleIntegerProperty
+import javafx.beans.property.SimpleMapProperty
+import javafx.beans.property.SimpleObjectProperty
+import javafx.beans.property.SimpleStringProperty
 import javafx.collections.ObservableMap
 import org.hedbor.evan.dndgen.score.Ability
 import org.hedbor.evan.dndgen.score.SavingThrow
@@ -11,15 +13,17 @@ import org.hedbor.evan.dndgen.type.Alignment
 import org.hedbor.evan.dndgen.type.Race
 import org.hedbor.evan.dndgen.type.SkillType
 import org.hedbor.evan.dndgen.util.expToLevel
-import tornadofx.*
+import tornadofx.getValue
+import tornadofx.integerBinding
+import tornadofx.setValue
 
 
 /**
- * Eventual replacement for [org.hedbor.evan.dndgen.CharacterSheet]
+ * Represents a D&D character's information.
  */
 @Suppress("MemberVisibilityCanBePrivate")
 class CharacterSheet {
-    val raceProperty = SimpleObjectProperty<Race?>()
+    val raceProperty = SimpleObjectProperty<Race>()
     var race: Race? by raceProperty
 
     val abilitiesProperty = SimpleMapProperty<AbilityType, Ability>()
