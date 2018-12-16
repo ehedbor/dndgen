@@ -7,15 +7,15 @@ import javafx.beans.property.SimpleStringProperty
 import javafx.collections.ObservableMap
 import org.hedbor.evan.dndgen.score.Ability
 import org.hedbor.evan.dndgen.score.SavingThrow
+import org.hedbor.evan.dndgen.score.Score
 import org.hedbor.evan.dndgen.score.Skill
-import org.hedbor.evan.dndgen.type.AbilityType
-import org.hedbor.evan.dndgen.type.Alignment
-import org.hedbor.evan.dndgen.type.Race
-import org.hedbor.evan.dndgen.type.SkillType
+import org.hedbor.evan.dndgen.type.*
 import org.hedbor.evan.dndgen.util.expToLevel
 import tornadofx.getValue
 import tornadofx.integerBinding
+import tornadofx.observable
 import tornadofx.setValue
+import kotlin.reflect.KClass
 
 
 /**
@@ -26,13 +26,13 @@ class CharacterSheet {
     val raceProperty = SimpleObjectProperty<Race>()
     var race: Race? by raceProperty
 
-    val abilitiesProperty = SimpleMapProperty<AbilityType, Ability>()
+    val abilitiesProperty = SimpleMapProperty<AbilityType, Ability>(generateDefaults { Ability(this, it, 10) })
     var abilities: ObservableMap<AbilityType, Ability>? by abilitiesProperty
 
-    val savingThrowsProperty = SimpleMapProperty<AbilityType, SavingThrow>()
+    val savingThrowsProperty = SimpleMapProperty<AbilityType, SavingThrow>(generateDefaults { SavingThrow(this, it) })
     var savingThrows: ObservableMap<AbilityType, SavingThrow>? by savingThrowsProperty
 
-    val skillsProperty = SimpleMapProperty<SkillType,Skill>()
+    val skillsProperty = SimpleMapProperty<SkillType, Skill>(generateDefaults { Skill(this, it) })
     var skills: ObservableMap<SkillType, Skill>? by skillsProperty
 
     val alignmentProperty = SimpleObjectProperty<Alignment>()
@@ -64,4 +64,28 @@ class CharacterSheet {
 
     val proficiencyBonusProperty = levelProperty.integerBinding { 2 + (it as Int - 1) / 4 }
     val proficiencyBonus: Int by proficiencyBonusProperty
+
+
+    companion object {
+        private fun <T, S> generateDefaults(enumClass: KClass<T>, initScore: (T) -> S): ObservableMap<T, S>
+                where T : Enum<T>, T : ScoreType, S : Score {
+            var map = emptyMap<T, S>()
+            for (type in enumClass.java.enumConstants) {
+                map += type to initScore(type)
+            }
+            return map.observable()
+        }
+
+        /**
+         * Returns a suitable list of default values for the [savingThrows], [skills], or [abilities].
+         *
+         * @param initScore A function that returns a new [S] given a [T], used to construct the map
+         * @param T The type of score
+         * @param S The score itself
+         */
+        private inline fun <reified T, S> generateDefaults(noinline initScore: (T) -> S): ObservableMap<T, S>
+                where T : Enum<T>, T : ScoreType, S : Score {
+            return generateDefaults(T::class, initScore)
+        }
+    }
 }
